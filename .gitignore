@@ -1,0 +1,12 @@
+﻿# 忽略指定格式文凭
+*.log
+*.class
+.classpath
+.project
+
+
+# 忽略指定文件夹
+*/target/**
+.settings/
+target/
+jrebel/
