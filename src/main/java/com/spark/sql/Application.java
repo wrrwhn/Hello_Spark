@@ -1,11 +1,11 @@
-package com.spark.rest;
+package com.spark.sql;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.eclipse.jetty.http.HttpStatus;
 
-import static spark.Spark.post;
 import static spark.Spark.get;
+import static spark.Spark.post;
 
 /**
  * Created by Yao on 2016/3/18.
@@ -19,8 +19,8 @@ public class Application {
         post("/add", (req, res)->{
            try{
                ObjectMapper mapper= new ObjectMapper();
-               Data data;
-               data = mapper.readValue(req.body(), Data.class);
+               Article data;
+               data = mapper.readValue(req.body(), Article.class);
                if(!data.isValid()){
                    res.status(HttpStatus.BAD_REQUEST_400);
                    return null;
