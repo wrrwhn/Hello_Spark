@@ -10,7 +10,7 @@ public class Article implements IValidable {
     private UUID id;
     private String title;
     private String content;
-    private List<Category> categories = new LinkedList<>();
+    private List<String> categories = new LinkedList<>();
 
     @Override
     public boolean isValid() {

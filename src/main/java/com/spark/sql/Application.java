@@ -3,6 +3,7 @@ package com.spark.sql;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.eclipse.jetty.http.HttpStatus;
+import org.sql2o.Sql2o;
 
 import static spark.Spark.get;
 import static spark.Spark.post;
@@ -14,7 +15,8 @@ public class Application {
 
     public static void main(String[] args) {
 
-        DataService service = new DataService();
+        Sql2o sql2o= new Sql2o("jdbc:postgresql://localhost:5432/spark", "postgres", "8P$tZiCTek%u");
+        DataService service = new DataService(sql2o);
 
         post("/add", (req, res)->{
            try{
