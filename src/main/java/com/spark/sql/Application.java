@@ -15,6 +15,7 @@ public class Application {
 
     public static void main(String[] args) {
 
+        // 连接至数据库
         Sql2o sql2o= new Sql2o("jdbc:postgresql://localhost:5432/spark", "postgres", "8P$tZiCTek%u");
         DataService service = new DataService(sql2o);
 
