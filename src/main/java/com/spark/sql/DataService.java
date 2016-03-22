@@ -22,11 +22,11 @@ public class DataService {
     public UUID add(Article article) {
         try (Connection conn = sql2o.beginTransaction()) {
             article.setId(UUID.randomUUID());
-            conn.createQuery("insert into article(id, title, content) values(:id, :title, :content)")
-                    .addParameter("id", article.getId())
+            conn.createQuery("insert into article(id, title, content) values(:id, :title, :content)")   // 插入语句
+                    .addParameter("id", article.getId())                                                // 补充参数值
                     .addParameter("title", article.getTitle())
                     .addParameter("content", article.getContent())
-                    .executeUpdate();
+                    .executeUpdate();                                                                   // 语句执行
             if (null != article.getCategories() && article.getCategories().size() > 0) {
                 article.getCategories().forEach(p -> {
                     conn.createQuery("insert into category(id, article_id, content) values(:id, :article_id, :content)")
@@ -36,7 +36,7 @@ public class DataService {
                             .executeUpdate();
                 });
             }
-            conn.commit();
+            conn.commit();                                                                              // 执行内容提交
             return article.getId();
         }
 
@@ -49,7 +49,7 @@ public class DataService {
             list.forEach(p -> {
                 List<Category> categories = conn.createQuery("select * from category where article_id= :article_id")
                         .addParameter("article_id", p.getId())
-                        .executeAndFetch(Category.class);
+                        .executeAndFetch(Category.class);                                               // 结果类型转换
 
                 if (null != categories && categories.size() > 0)
                     p.setCategories(categories.stream().map(Category::getContent).collect(Collectors.toList()));
@@ -57,7 +57,6 @@ public class DataService {
             return list;
         }
     }
-
 
     public static String dataToJson(Object data) {
 
